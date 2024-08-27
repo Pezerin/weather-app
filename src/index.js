@@ -1,2 +1,3 @@
 import "./styles.css";
-import { getWeather } from "./getWeather";
+import { getData } from "./getData";
+import { processData } from "./processData";
