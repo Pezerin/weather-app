@@ -1,6 +1,7 @@
 import "./styles.css";
 import { getData } from "./getData";
 import { processData } from "./processData";
+import { render } from "./render";
 
 const form = document.querySelector("form");
 
@@ -8,7 +9,16 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const location = document.getElementById("location");
-  const data = await getData(location.value);
+  let data = {};
+
+  try {
+    data = await getData(location.value);
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+
   const weather = await processData(data);
   console.log(weather);
+  render(weather);
 });

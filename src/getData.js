@@ -5,6 +5,11 @@ export async function getData(location) {
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/?key=${key}`,
     { mode: "cors" }
   );
+
+  if (!response.ok) {
+    throw new Error(`Data Error: ${response.status}`);
+  }
+
   const weatherData = await response.json();
 
   return weatherData;
