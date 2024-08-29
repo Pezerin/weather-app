@@ -1,9 +1,10 @@
 import "./styles.css";
 import { getData } from "./getData";
 import { processData } from "./processData";
-import { render } from "./render";
+import { render, updateUnits } from "./render";
 
 const form = document.querySelector("form");
+updateUnits();
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
