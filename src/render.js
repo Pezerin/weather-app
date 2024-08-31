@@ -23,6 +23,7 @@ export function render(weather) {
   const feels = document.getElementById("feels");
   const desc = document.getElementById("desc");
   const icon = document.getElementById("current-icon");
+  const forecast = document.getElementById("forecast");
 
   city.textContent = weather.resolvedAddress;
 
@@ -37,6 +38,52 @@ export function render(weather) {
   loadIcon(weather.currentConditions.icon).then((iconPath) => {
     icon.src = iconPath;
   });
+
+  forecast.innerHTML = "";
+
+  for (let i = 1; i < 7; i++) {
+    const day = weather.days[i];
+
+    const div = document.createElement("div");
+    div.classList.add("day");
+
+    const date = document.createElement("h3");
+    date.id = "forecast-date";
+    const rawDate = parseISO(day.datetime);
+    const formattedDate = format(rawDate, "EEE, MMM d");
+    date.textContent = formattedDate;
+
+    const icon = document.createElement("img");
+    icon.id = "forecast-icon";
+    loadIcon(weather.currentConditions.icon).then((iconPath) => {
+      icon.src = iconPath;
+      icon.height = 35;
+    });
+
+    const rain = document.createElement("div");
+    rain.id = "rain";
+
+    const precipprob = document.createElement("h3");
+    precipprob.textContent = `${day.precipprob}%`;
+
+    const water = document.createElement("img");
+    loadIcon("water").then((iconPath) => {
+      water.src = iconPath;
+      water.height = 35;
+    });
+
+    rain.append(precipprob, water);
+
+    const lowHigh = document.createElement("h3");
+    lowHigh.id = "low-high";
+    lowHigh.textContent = `${FtoC(day.tempmin).toFixed(1)}${units} / ${FtoC(day.tempmax).toFixed(1)}${units}`;
+    unitButton.addEventListener("click", () => {
+      lowHigh.textContent = `${FtoC(day.tempmin).toFixed(1)}${units} / ${FtoC(day.tempmax).toFixed(1)}${units}`;
+    });
+
+    div.append(date, icon, rain, lowHigh);
+    forecast.appendChild(div);
+  }
 
   unitButton.addEventListener("click", () => {
     temp.textContent = `${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
