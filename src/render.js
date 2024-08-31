@@ -22,7 +22,7 @@ export function render(weather) {
   const icon = document.getElementById("current-icon");
 
   city.textContent = weather.resolvedAddress;
-  temp.textContent = `Temperature: ${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
+  temp.textContent = `${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
   feels.textContent = `Feels like: ${FtoC(weather.currentConditions.feelslike).toFixed(1)}${units}`;
   desc.textContent = weather.description;
 
@@ -31,7 +31,7 @@ export function render(weather) {
   });
 
   unitButton.addEventListener("click", () => {
-    temp.textContent = `Temperature: ${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
+    temp.textContent = `${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
     feels.textContent = `Feels like: ${FtoC(weather.currentConditions.feelslike).toFixed(1)}${units}`;
   });
 

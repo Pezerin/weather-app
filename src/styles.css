@@ -7,20 +7,66 @@
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #header {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 10px;
+  margin-bottom: 25px;
 }
 
 #header h1 {
   margin-bottom: 25px;
 }
 
+#header form {
+  margin-bottom: 10px;
+}
+
+input {
+  border: 2px solid gray;
+  border-radius: 25px;
+  padding: 5px;
+  height: 25px;
+}
+
+button {
+  background-color: rgb(168, 229, 253);
+  color: black;
+  font-weight: bold;
+  border: 0px;
+  border-radius: 15px;
+  padding: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+button:hover {
+  background-color: skyblue;
+}
+
 #current {
+  background-color: skyblue;
+  width: 1000px;
+  border: 25px solid rgb(168, 229, 253);
+  border-radius: 25px;
+  padding-bottom: 75px;
+}
+
+#city {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#current-info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
+  justify-content: center;
+  gap: 100px;
 }

@@ -8,7 +8,7 @@ updateUnits();
 let data = {};
 
 try {
-  data = await getData("London");
+  data = await getData("New York");
 } catch (error) {
   console.log(error.message);
 }
