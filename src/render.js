@@ -1,3 +1,5 @@
+import { parseISO, format } from "date-fns";
+
 let units = "°F";
 const unitButton = document.getElementById("units");
 
@@ -16,12 +18,18 @@ export function updateUnits() {
 
 export function render(weather) {
   const city = document.getElementById("city");
+  const date = document.getElementById("date");
   const temp = document.getElementById("temp");
   const feels = document.getElementById("feels");
   const desc = document.getElementById("desc");
   const icon = document.getElementById("current-icon");
 
   city.textContent = weather.resolvedAddress;
+
+  const rawDate = parseISO(weather.days[0].datetime);
+  const formattedDate = format(rawDate, "EEEE, MMMM d, yyyy");
+  date.textContent = formattedDate;
+
   temp.textContent = `${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
   feels.textContent = `Feels like: ${FtoC(weather.currentConditions.feelslike).toFixed(1)}${units}`;
   desc.textContent = weather.description;
