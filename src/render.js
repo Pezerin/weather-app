@@ -18,10 +18,17 @@ export function render(weather) {
   const city = document.getElementById("city");
   const temp = document.getElementById("temp");
   const feels = document.getElementById("feels");
+  const desc = document.getElementById("desc");
+  const icon = document.getElementById("current-icon");
 
   city.textContent = weather.resolvedAddress;
   temp.textContent = `Temperature: ${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
   feels.textContent = `Feels like: ${FtoC(weather.currentConditions.feelslike).toFixed(1)}${units}`;
+  desc.textContent = weather.description;
+
+  loadIcon(weather.currentConditions.icon).then((iconPath) => {
+    icon.src = iconPath;
+  });
 
   unitButton.addEventListener("click", () => {
     temp.textContent = `Temperature: ${FtoC(weather.currentConditions.temp).toFixed(1)}${units}`;
@@ -34,5 +41,14 @@ export function render(weather) {
     }
 
     return (F - 32) * (5 / 9);
+  }
+}
+
+async function loadIcon(iconName) {
+  try {
+    const iconModule = await import(`./icons/${iconName}.svg`);
+    return iconModule.default;
+  } catch (error) {
+    console.log("Error loading icon:", error.message);
   }
 }

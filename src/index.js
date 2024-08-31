@@ -5,6 +5,17 @@ import { render, updateUnits } from "./render";
 
 const form = document.querySelector("form");
 updateUnits();
+let data = {};
+
+try {
+  data = await getData("London");
+} catch (error) {
+  console.log(error.message);
+}
+
+const weather = await processData(data);
+console.log(weather);
+render(weather);
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
